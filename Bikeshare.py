@@ -125,75 +125,75 @@ def load_data(city, month, day):
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
-
+    print(df.head())
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
-
     # display the most common month
-
-
+    mode_month = df['month'].mode()[0]
+    print('The month with the most times of travel:', mode_month)
     # display the most common day of week
-
-
+    mode_day = df['day_of_week'].mode()[0]
+    print('The day of week with the most times of travel:', mode_day)
     # display the most common start hour
+    mode_hour = df['Start Time'].dt.hour.mode()[0]
+    print('The most common start hour:', mode_hour)
 
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nThis took {} seconds.".format(time.time() - start_time))
     print('-'*40)
-
-
-def station_stats(df):
-    """Displays statistics on the most popular stations and trip."""
-
-    print('\nCalculating The Most Popular Stations and Trip...\n')
-    start_time = time.time()
-
-    # display most commonly used start station
-
-
-    # display most commonly used end station
-
-
-    # display most frequent combination of start station and end station trip
-
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
-
-
-def trip_duration_stats(df):
-    """Displays statistics on the total and average trip duration."""
-
-    print('\nCalculating Trip Duration...\n')
-    start_time = time.time()
-
-    # display total travel time
-
-
-    # display mean travel time
-
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
-
-
-def user_stats(df):
-    """Displays statistics on bikeshare users."""
-
-    print('\nCalculating User Stats...\n')
-    start_time = time.time()
-
-    # Display counts of user types
-
-
-    # Display counts of gender
-
-
-    # Display earliest, most recent, and most common year of birth
-
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+#
+#
+# def station_stats(df):
+#     """Displays statistics on the most popular stations and trip."""
+#
+#     print('\nCalculating The Most Popular Stations and Trip...\n')
+#     start_time = time.time()
+#
+#     # display most commonly used start station
+#
+#
+#     # display most commonly used end station
+#
+#
+#     # display most frequent combination of start station and end station trip
+#
+#
+#     print("\nThis took {} seconds.".format(time.time() - start_time))
+#     print('-'*40)
+#
+#
+# def trip_duration_stats(df):
+#     """Displays statistics on the total and average trip duration."""
+#
+#     print('\nCalculating Trip Duration...\n')
+#     start_time = time.time()
+#
+#     # display total travel time
+#
+#
+#     # display mean travel time
+#
+#
+#     print("\nThis took {} seconds.".format(time.time() - start_time))
+#     print('-'*40)
+#
+#
+# def user_stats(df):
+#     """Displays statistics on bikeshare users."""
+#
+#     print('\nCalculating User Stats...\n')
+#     start_time = time.time()
+#
+#     # Display counts of user types
+#
+#
+#     # Display counts of gender
+#
+#
+#     # Display earliest, most recent, and most common year of birth
+#
+#
+#     print("\nThis took {} seconds.".format(time.time() - start_time))
+#     print('-'*40)
 
 
 def main():
@@ -202,9 +202,9 @@ def main():
         df = load_data(city, month, day)
 
         time_stats(df)
-        station_stats(df)
-        trip_duration_stats(df)
-        user_stats(df)
+#        station_stats(df)
+#        trip_duration_stats(df)
+#        user_stats(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
@@ -212,7 +212,7 @@ def main():
 
 
 if __name__ == "__main__":
-	main()
+    main()
 
 
 # filename = 'chicago.csv'
