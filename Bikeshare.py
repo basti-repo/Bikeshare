@@ -121,7 +121,7 @@ def load_data(city, month, day):
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
-    print(df.head())
+
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
     # display the most common month
@@ -136,27 +136,27 @@ def time_stats(df):
 
     print("\nThis took {} seconds.".format(time.time() - start_time))
     print('-'*40)
-#
-#
-# def station_stats(df):
-#     """Displays statistics on the most popular stations and trip."""
-#
-#     print('\nCalculating The Most Popular Stations and Trip...\n')
-#     start_time = time.time()
-#
-#     # display most commonly used start station
-#
-#
-#     # display most commonly used end station
-#
-#
-#     # display most frequent combination of start station and end station trip
-#
-#
-#     print("\nThis took {} seconds.".format(time.time() - start_time))
-#     print('-'*40)
-#
-#
+
+
+def station_stats(df):
+    """Displays statistics on the most popular stations and trip."""
+
+    print('\nCalculating The Most Popular Stations and Trip...\n')
+    start_time = time.time()
+    # display most commonly used start station
+    mode_startstation = df['Start Station'].mode()[0]
+    print('The most commonly used start station:', mode_startstation)
+    # display most commonly used end station
+    mode_endstation = df['End Station'].mode()[0]
+    print('The most commonly used end station:', mode_endstation)
+    # display most frequent combination of start station and end station trip
+    mode_trip = df.groupby(['Start Station', 'End Station']).size().idxmax()
+    print('The most common trip is from \'{}\' to \'{}\''.format(mode_trip[0], mode_trip[1]))
+
+    print("\nThis took {} seconds.".format(time.time() - start_time))
+    print('-'*40)
+
+
 # def trip_duration_stats(df):
 #     """Displays statistics on the total and average trip duration."""
 #
@@ -198,7 +198,7 @@ def main():
         df = load_data(city, month, day)
 
         time_stats(df)
-#        station_stats(df)
+        station_stats(df)
 #        trip_duration_stats(df)
 #        user_stats(df)
 
@@ -209,21 +209,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-# filename = 'chicago.csv'
-#
-# # load data file into a dataframe
-# df = pd.read_csv(filename)
-#
-# # convert the Start Time column to datetime
-# df['Start Time'] = pd.to_datetime(df['Start Time'])
-#
-# # extract hour from the Start Time column to create an hour column
-# df['hour'] = df['Start Time'].dt.hour
-#
-# # find the most common hour (from 0 to 23)
-# popular_hour = df['hour'].value_counts().idxmax()
-# # !!!!OR popular_hour = df['hour'].mode()[0]!!!!
-#
-# print('Most Frequent Start Hour:', popular_hour)
