@@ -17,14 +17,64 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-
+    city_valid = False
+    while city_valid == False:
+        city = input("Of which city do you want to explore bikeshare data: \n"
+                     "'Chicago', 'New York City' or 'Washington'?\n"
+                     "Type in the city, its first letter or 1, 2, 3, respectively:\n")
+        valid_cities = {'chicago': ['chicago', 'c', '1'],
+                        'new york city': ['new york city', 'new york', 'n', 'nyc', '2'],
+                        'washington': ['washington', 'w', '3']}
+        for key, value in valid_cities.items():
+            if str(city).lower().strip() in value:
+                city = key
+                city_valid = True
+                break
+        else:
+            print('\n-----Please enter a valid city!-----\n\n')
 
     # get user input for month (all, january, february, ... , june)
-
+    month_valid = False
+    while month_valid == False:
+        month = input("Of which month (January to June) would you like do see data?\n"
+                      "If you don\'t want to filter by month, type 'all' or '0'!\n"
+                      "Type in the month, its first three letters or '1', '2' or '3' etc., respectively:\n")
+        valid_months = {'all': ['all', '0'],
+                        'january': ['january', 'jan', '1'],
+                        'february': ['february', 'feb', '2'],
+                        'march': ['march', 'mar', '3'],
+                        'april': ['april', 'apr', '4'],
+                        'may': ['may', '5'],
+                        'june': ['june', 'jun', '6']}
+        for key, value in valid_months.items():
+            if str(month).lower().strip() in value:
+                month = key
+                month_valid = True
+                break
+        else:
+            print('\n-----Please enter a valid month!-----\n\n')
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
-
-
+    day_valid = False
+    while day_valid == False:
+        day = input("Of which day of the week (Monday to Sunday) would you like do see data?\n"
+                    "If you don\'t want to filter by day type, 'all' or '0'!\n"
+                    "Type in the day, its first three letters or '1' for Monday, '2' for Tuesday etc.:\n")
+        valid_days = {'all': ['all', '0'],
+                      'monday': ['monday', 'mon', '1'],
+                      'tuesday': ['tuesday', 'tue', '2'],
+                      'wednesday': ['wednesday', 'wed', '3'],
+                      'thursday': ['thursday', 'thu', '4'],
+                      'friday': ['friday', 'fri', '5'],
+                      'saturday': ['saturday', 'sat', '6'],
+                      'sunday': ['sunday', 'sun', '7']}
+        for key, value in valid_days.items():
+            if str(day).lower().strip() in value:
+                day = key
+                day_valid = True
+                break
+        else:
+            print('\n-----Please enter a valid day of the week!-----\n\n')
     print('-'*40)
     return city, month, day
 
