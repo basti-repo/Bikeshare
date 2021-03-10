@@ -92,14 +92,14 @@ def load_data(city, month, day):
     """
 
     # load data file into a dataframe
-    df = pd.read_csv(CITY_DATA[city.lower()])
+    df = pd.read_csv(CITY_DATA[city])
 
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
     # extract month and day of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
-    df['day_of_week'] = df['Start Time'].dt.day_of_week
+    df['day_of_week'] = df['Start Time'].dt.day_name()
 
 
     # filter by month if applicable
@@ -113,12 +113,8 @@ def load_data(city, month, day):
 
     # filter by day of week if applicable
     if day != 'all':
-        # index of the day list to get the correspondig int
-        days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-        day = days.index(day.lower())
-
         # filter by day of week to create the new dataframe
-        df =  df[df['day_of_week']==day]
+        df =  df[df['day_of_week']==day.capitalize()]
 
     return df
 
