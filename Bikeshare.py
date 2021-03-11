@@ -5,6 +5,7 @@ CITY_DATA = {'chicago': 'chicago.csv',
              'new york city': 'new_york_city.csv',
              'washington': 'washington.csv'}
 
+
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -23,9 +24,17 @@ def get_filters():
         city = input("Of which city do you want to explore bikeshare data: \n"
                      "'Chicago', 'New York City' or 'Washington'?\n"
                      "Type in the city, its first letter or 1, 2, 3, respectively:\n")
-        valid_cities = {'chicago': ['chicago', 'c', '1'],
-                        'new york city': ['new york city', 'new york', 'n', 'nyc', '2'],
-                        'washington': ['washington', 'w', '3']}
+        valid_cities = {'chicago': ['chicago',
+                                    'c',
+                                    '1'],
+                        'new york city': ['new york city',
+                                          'new york',
+                                          'n',
+                                          'nyc',
+                                          '2'],
+                        'washington': ['washington',
+                                       'w',
+                                       '3']}
         for key, value in valid_cities.items():
             if str(city).lower().strip() in value:
                 city = key
@@ -40,13 +49,25 @@ def get_filters():
         month = input("Of which month (January to June) would you like do see data?\n"
                       "If you don\'t want to filter by month, type 'all' or '0'!\n"
                       "Type in the month, its first three letters or '1', '2' or '3' etc., respectively:\n")
-        valid_months = {'all': ['all', '0'],
-                        'january': ['january', 'jan', '1'],
-                        'february': ['february', 'feb', '2'],
-                        'march': ['march', 'mar', '3'],
-                        'april': ['april', 'apr', '4'],
-                        'may': ['may', '5'],
-                        'june': ['june', 'jun', '6']}
+        valid_months = {'all': ['all',
+                                '0'],
+                        'january': ['january',
+                                    'jan',
+                                    '1'],
+                        'february': ['february',
+                                     'feb',
+                                     '2'],
+                        'march': ['march',
+                                  'mar',
+                                  '3'],
+                        'april': ['april',
+                                  'apr',
+                                  '4'],
+                        'may': ['may',
+                                '5'],
+                        'june': ['june',
+                                 'jun',
+                                 '6']}
         for key, value in valid_months.items():
             if str(month).lower().strip() in value:
                 month = key
@@ -61,14 +82,29 @@ def get_filters():
         day = input("Of which day of the week (Monday to Sunday) would you like do see data?\n"
                     "If you don\'t want to filter by day type, 'all' or '0'!\n"
                     "Type in the day, its first three letters or '1' for Monday, '2' for Tuesday etc.:\n")
-        valid_days = {'all': ['all', '0'],
-                      'monday': ['monday', 'mon', '1'],
-                      'tuesday': ['tuesday', 'tue', '2'],
-                      'wednesday': ['wednesday', 'wed', '3'],
-                      'thursday': ['thursday', 'thu', '4'],
-                      'friday': ['friday', 'fri', '5'],
-                      'saturday': ['saturday', 'sat', '6'],
-                      'sunday': ['sunday', 'sun', '7']}
+        valid_days = {'all': ['all',
+                              '0'],
+                      'monday': ['monday',
+                                 'mon',
+                                 '1'],
+                      'tuesday': ['tuesday',
+                                  'tue',
+                                  '2'],
+                      'wednesday': ['wednesday',
+                                    'wed',
+                                    '3'],
+                      'thursday': ['thursday',
+                                   'thu',
+                                   '4'],
+                      'friday': ['friday',
+                                 'fri',
+                                 '5'],
+                      'saturday': ['saturday',
+                                   'sat',
+                                   '6'],
+                      'sunday': ['sunday',
+                                 'sun',
+                                 '7']}
         for key, value in valid_days.items():
             if str(day).lower().strip() in value:
                 day = key
@@ -120,10 +156,11 @@ def load_data(city, month, day):
         df = df[df['day_of_week'] == day.capitalize()]
     return df
 
+
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
-    print('\nCalculating The Most Frequent Times of Travel...\n')
+    print('Calculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
     # display the most common month
@@ -145,7 +182,7 @@ def time_stats(df):
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
-    print('\nCalculating The Most Popular Stations and Trip...\n')
+    print('Calculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
 
     # display most commonly used start station
@@ -168,7 +205,7 @@ def station_stats(df):
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
-    print('\nCalculating Trip Duration...\n')
+    print('Calculating Trip Duration...\n')
     start_time = time.time()
 
     # display total travel time in hours
@@ -189,7 +226,7 @@ def trip_duration_stats(df):
 def user_stats(df):
     """Displays statistics on bikeshare users."""
 
-    print('\nCalculating User Stats...\n')
+    print('Calculating User Stats...\n')
     start_time = time.time()
 
     # Display counts of user types
