@@ -160,7 +160,7 @@ def trip_duration_stats(df):
     # display total travel time in hours
     total_hours = divmod(df['Trip Duration'].sum(), 3600)
     total_minutes = divmod(total_hours[1], 60)
-    print('The total trip duration: {} hours and {} minutes'.format(total_hours[0], total_minutes[0]))
+    print('The total trip duration: {} hours and {} minutes'.format(int(total_hours[0]), int(total_minutes[0])))
     # display mean travel time in minutes
     mean_minutes = divmod(df['Trip Duration'].mean(), 60)
     print('The mean trip duration: {} minutes and {} seconds'.format(int(mean_minutes[0]), int(mean_minutes[1].round())))
@@ -169,23 +169,39 @@ def trip_duration_stats(df):
     print('-'*40)
 
 
-# def user_stats(df):
-#     """Displays statistics on bikeshare users."""
-#
-#     print('\nCalculating User Stats...\n')
-#     start_time = time.time()
-#
-#     # Display counts of user types
-#
-#
-#     # Display counts of gender
-#
-#
-#     # Display earliest, most recent, and most common year of birth
-#
-#
-#     print("\nThis took {} seconds.".format(time.time() - start_time))
-#     print('-'*40)
+def user_stats(df):
+    """Displays statistics on bikeshare users."""
+
+    print('\nCalculating User Stats...\n')
+    start_time = time.time()
+    # Display counts of user types
+    usertype_count = df['User Type'].value_counts()
+    usertypes = usertype_count.count()
+    print('There are {} different user types!'.format(usertypes))
+    for index, value in usertype_count.items():
+        print(value, index)
+    # Display counts of gender
+    if 'Gender' in df.columns:
+        gender_count = df['Gender'].value_counts()
+        genders = gender_count.count()
+        print('There are {} different genders registered!'.format(genders))
+        for index, value in gender_count.items():
+            print('{} Subscribers are {}'.format(value, index))
+    else:
+        print('There are no data on Genders in this city!')
+    # Display earliest, most recent, and most common year of birth
+    if 'Birth Year' in df.columns:
+        youngest = df['Birth Year'].max()
+        oldest = df['Birth Year'].min()
+        mode_yob = df['Birth Year'].mode()
+        print('The youngest Subscriber was born in: ', int(youngest))
+        print('The oldest Subscriber was born in: ', int(oldest))
+        print('The most common Year of Birth is: ', int(mode_yob[0]))
+    else:
+        print('There are no data on Years of Birth in this city!')
+
+    print("\nThis took {} seconds.".format(time.time() - start_time))
+    print('-'*40)
 
 
 def main():
@@ -196,7 +212,7 @@ def main():
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
-#        user_stats(df)
+        user_stats(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
