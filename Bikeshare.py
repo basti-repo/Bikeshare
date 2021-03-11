@@ -283,13 +283,17 @@ def display_raw(df_raw):
     Displays the first 5 lines of raw data.
     """
     # get user input whether raw data should be displayed or not
-    see_raw = input('Do you want to see the first few lines of raw data?\n'
-                    'Type "yes"/"y" or any other to continue without:\n')
-    if str(see_raw).lower().strip() in ('yes', 'y'):
-        print(df_raw.head())
+    see_raw = input('Enter "yes" or "y" to see 5 lines of the raw data!\n'
+                    'Enter "no" or "n" to continue with statistics:\n')
+    start_loc = 0
+    while str(see_raw).lower().strip() not in ('no', 'n'):
+        print(df_raw.iloc[start_loc:start_loc + 5])
+        start_loc += 5
         print('-' * 40)
+        see_raw = input('Enter "yes" or "y" to view the next 5 lines!\n'
+                        'Enter "no" or "n" to continue with statistics:\n')
     else:
-        print('No raw data requested..\n'
+        print('No more raw data requested..\n'
               '..continuing with statistics!')
         print('-' * 40)
 
