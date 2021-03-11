@@ -202,8 +202,7 @@ def station_stats(df):
 
     # display most frequent combination of start station and end station trip
     mode_trip = df.groupby(['Start Station', 'End Station']).size().idxmax()
-    print('The most common trip is from "{}" to "{}"'.format(mode_trip[0],
-                                                                 mode_trip[1]))
+    print(f'The most common trip is from "{mode_trip[0]}" to "{mode_trip[1]}"')
 
     print("\nThis took {} seconds.".format(time.time() - start_time))
     print('-'*40)
@@ -242,7 +241,7 @@ def user_stats(df):
     # Display counts of user types
     usertype_count = df['User Type'].value_counts()
     usertypes = usertype_count.count()
-    print('There are {} different user types!'.format(usertypes))
+    print(f'There are {usertypes} different user types!')
     for index, value in usertype_count.items():
         print(value, index)
 
@@ -250,9 +249,9 @@ def user_stats(df):
     if 'Gender' in df.columns:
         gender_count = df['Gender'].value_counts()
         genders = gender_count.count()
-        print('There are {} different genders registered!'.format(genders))
+        print(f'There are {genders} different genders registered!')
         for index, value in gender_count.items():
-            print('{} Subscribers are {}'.format(value, index))
+            print(f'{value} Subscribers are {index}')
     else:
         print('There are no data on Genders in this city!')
 
