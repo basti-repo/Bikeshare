@@ -18,11 +18,11 @@ def get_filters():
                 or "all" to apply no day filter
     """
 
-    global day, month, city
+    city, month, day = '', '', ''
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington).
     city_valid = False
-    while city_valid == False:
+    while city_valid is False:
         city = input('Of which city do you want to explore bikeshare data: \n'
                      '"Chicago", "New York City" or Washington"?\n')
         valid_cities = {'chicago': ['chicago',
@@ -46,7 +46,7 @@ def get_filters():
 
     # get user input for month (all, january, february, ... , june)
     month_valid = False
-    while month_valid == False:
+    while month_valid is False:
         month = input('Of which month would you like do see data?\n'
                       'Data from January to June is available\n'
                       'If you don\'t want to filter by month, '
@@ -80,7 +80,7 @@ def get_filters():
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     day_valid = False
-    while day_valid == False:
+    while day_valid is False:
         day = input('Of which day of the week would you like do see data?\n'
                     '"Monday" (1) to "Sunday" (7)\n'
                     'If you don\'t want to filter by day, '
@@ -167,7 +167,8 @@ def load_data(city, month, day):
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
-
+    input('Press "ENTER" to continue:')
+    print('-' * 40)
     print('Calculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
@@ -189,7 +190,8 @@ def time_stats(df):
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
-
+    input('Press "ENTER" to continue:')
+    print('-' * 40)
     print('Calculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
 
@@ -211,7 +213,8 @@ def station_stats(df):
 
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
-
+    input('Press "ENTER" to continue:')
+    print('-' * 40)
     print('Calculating Trip Duration...\n')
     start_time = time.time()
 
@@ -235,7 +238,8 @@ def trip_duration_stats(df):
 
 def user_stats(df):
     """Displays statistics on bikeshare users."""
-
+    input('Press "ENTER" to continue:')
+    print('-' * 40)
     print('Calculating User Stats...\n')
     start_time = time.time()
 
@@ -289,10 +293,11 @@ def display_raw(df_raw):
               '..continuing with statistics!')
         print('-' * 40)
 
+
 def main():
     while True:
-        c, m, d = get_filters()
-        df_raw, df = load_data(c, m, d)
+        city, month, day = get_filters()
+        df_raw, df = load_data(city, month, day)
         display_raw(df_raw)
         time_stats(df)
         station_stats(df)
