@@ -243,7 +243,7 @@ def user_stats(df):
     usertypes = usertype_count.count()
     print(f'There are {usertypes} different user types!')
     for index, value in usertype_count.items():
-        print(value, index)
+        print(' ', value, index)
 
     # Display counts of gender
     if 'Gender' in df.columns:
@@ -251,7 +251,7 @@ def user_stats(df):
         genders = gender_count.count()
         print(f'There are {genders} different genders registered!')
         for index, value in gender_count.items():
-            print(f'{value} Subscribers are {index}')
+            print(f'  {value} Subscribers are {index}')
     else:
         print('There are no data on Genders in this city!')
 
@@ -261,8 +261,8 @@ def user_stats(df):
         oldest = df['Birth Year'].min()
         mode_yob = df['Birth Year'].mode()
         print('The youngest Subscriber was born in: ', int(youngest))
-        print('The oldest Subscriber was born in: ', int(oldest))
-        print('The most common Year of Birth is: ', int(mode_yob[0]))
+        print('  The oldest Subscriber was born in: ', int(oldest))
+        print('   The most common Year of Birth is: ', int(mode_yob[0]))
     else:
         print('There are no data on Years of Birth in this city!')
 
