@@ -47,10 +47,10 @@ def get_filters():
     # get user input for month (all, january, february, ... , june)
     month_valid = False
     while month_valid == False:
-        month = input("Of which month would you like do see data?\n"
-                      "Data from January to June is available\n"
-                      "If you don\'t want to filter by month, "
-                      "type 'all' or '0'!\n")
+        month = input('Of which month would you like do see data?\n'
+                      'Data from January to June is available\n'
+                      'If you don\'t want to filter by month, '
+                      'type "all" or "0"!\n')
         valid_months = {'all': ['all',
                                 '0'],
                         'january': ['january',
@@ -136,7 +136,8 @@ def load_data(city, month, day):
     """
 
     # load data file into a dataframe
-    df = pd.read_csv(CITY_DATA[city])
+    df_raw = pd.read_csv(CITY_DATA[city])
+    df = df_raw.copy(deep=True)
 
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
@@ -161,7 +162,7 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.capitalize()]
-    return df
+    return df_raw, df
 
 
 def time_stats(df):
@@ -182,7 +183,7 @@ def time_stats(df):
     mode_hour = df['Start Time'].dt.hour.mode()[0]
     print('The most common start hour: ', mode_hour)
 
-    print("\nThis took {} seconds.".format(time.time() - start_time))
+    print('\nThis took {} seconds.'.format(time.time() - start_time))
     print('-'*40)
 
 
@@ -204,7 +205,7 @@ def station_stats(df):
     mode_trip = df.groupby(['Start Station', 'End Station']).size().idxmax()
     print(f'The most common trip is from "{mode_trip[0]}" to "{mode_trip[1]}"')
 
-    print("\nThis took {} seconds.".format(time.time() - start_time))
+    print('\nThis took {} seconds.'.format(time.time() - start_time))
     print('-'*40)
 
 
@@ -228,7 +229,7 @@ def trip_duration_stats(df):
     print('The mean trip duration: '
           '{} minutes and {} seconds'.format(int(mean_minutes[0]),
                                              int(mean_minutes[1].round())))
-    print("\nThis took {} seconds.".format(time.time() - start_time))
+    print('\nThis took {} seconds.'.format(time.time() - start_time))
     print('-'*40)
 
 
@@ -266,15 +267,33 @@ def user_stats(df):
     else:
         print('There are no data on Years of Birth in this city!')
 
-    print("\nThis took {} seconds.".format(time.time() - start_time))
+    print('\nThis took {} seconds.'.format(time.time() - start_time))
     print('-'*40)
 
 
+def display_raw(df_raw):
+    """
+    Asks user to whether raw data should be displayed or not.
+
+    If yes:
+    Displays the first 5 lines of raw data.
+    """
+    # get user input whether raw data should be displayed or not
+    see_raw = input('Do you want to see the first few lines of raw data?\n'
+                    'Type "yes"/"y" or any other to continue without:\n')
+    if str(see_raw).lower().strip() in ('yes', 'y'):
+        print(df_raw.head())
+        print('-' * 40)
+    else:
+        print('No raw data requested..\n'
+              '..continuing with statistics!')
+        print('-' * 40)
+
 def main():
     while True:
-        city, month, day = get_filters()
-        df = load_data(city, month, day)
-
+        c, m, d = get_filters()
+        df_raw, df = load_data(c, m, d)
+        display_raw(df_raw)
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
