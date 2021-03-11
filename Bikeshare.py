@@ -11,19 +11,20 @@ def get_filters():
     Asks user to specify a city, month, and day to analyze.
 
     Returns:
-        (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
+        city -  name of the city to analyze
+        month - name of the month to filter by,
+                or "all" to apply no month filter
+        day -   name of the day of week to filter by,
+                or "all" to apply no day filter
     """
 
     global day, month, city
     print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    # get user input for city (chicago, new york city, washington).
     city_valid = False
     while city_valid == False:
-        city = input("Of which city do you want to explore bikeshare data: \n"
-                     "'Chicago', 'New York City' or 'Washington'?\n"
-                     "Type in the city, its first letter or 1, 2, 3, respectively:\n")
+        city = input('Of which city do you want to explore bikeshare data: \n'
+                     '"Chicago", "New York City" or Washington"?\n')
         valid_cities = {'chicago': ['chicago',
                                     'c',
                                     '1'],
@@ -46,9 +47,10 @@ def get_filters():
     # get user input for month (all, january, february, ... , june)
     month_valid = False
     while month_valid == False:
-        month = input("Of which month (January to June) would you like do see data?\n"
-                      "If you don\'t want to filter by month, type 'all' or '0'!\n"
-                      "Type in the month, its first three letters or '1', '2' or '3' etc., respectively:\n")
+        month = input("Of which month would you like do see data?\n"
+                      "Data from January to June is available\n"
+                      "If you don\'t want to filter by month, "
+                      "type 'all' or '0'!\n")
         valid_months = {'all': ['all',
                                 '0'],
                         'january': ['january',
@@ -79,9 +81,10 @@ def get_filters():
     # get user input for day of week (all, monday, tuesday, ... sunday)
     day_valid = False
     while day_valid == False:
-        day = input("Of which day of the week (Monday to Sunday) would you like do see data?\n"
-                    "If you don\'t want to filter by day type, 'all' or '0'!\n"
-                    "Type in the day, its first three letters or '1' for Monday, '2' for Tuesday etc.:\n")
+        day = input('Of which day of the week would you like do see data?\n'
+                    '"Monday" (1) to "Sunday" (7)\n'
+                    'If you don\'t want to filter by day, '
+                    'type "all" or "0"!\n')
         valid_days = {'all': ['all',
                               '0'],
                       'monday': ['monday',
@@ -118,14 +121,18 @@ def get_filters():
 
 def load_data(city, month, day):
     """
-    Loads data for the specified city and filters by month and day if applicable.
+    Loads data for the specified city and filters
+    by month and day if applicable.
 
     Args:
-        (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
+        city -  name of the city to analyze
+        month - name of the month to filter by,
+                or "all" to apply no month filter
+        day -   name of the day of week to filter by,
+                or "all" to apply no day filter
     Returns:
-        df - Pandas DataFrame containing city data filtered by month and day
+        df -    Pandas DataFrame containing city data
+                filtered by month and day
     """
 
     # load data file into a dataframe
@@ -195,7 +202,7 @@ def station_stats(df):
 
     # display most frequent combination of start station and end station trip
     mode_trip = df.groupby(['Start Station', 'End Station']).size().idxmax()
-    print('The most common trip is from \'{}\' to \'{}\''.format(mode_trip[0],
+    print('The most common trip is from "{}" to "{}"'.format(mode_trip[0],
                                                                  mode_trip[1]))
 
     print("\nThis took {} seconds.".format(time.time() - start_time))
@@ -212,13 +219,16 @@ def trip_duration_stats(df):
     total_days = divmod(df['Trip Duration'].sum(), 3600*24)
     total_hours = divmod(total_days[1], 3600)
     total_minutes = divmod(total_hours[1], 60)
-    print('The total trip duration: {} days {} hours and {} minutes'.format(int(total_days[0]),
-                                                                            int(total_hours[0]),
-                                                                            int(total_minutes[0])))
+    print('The total trip duration: '
+          '{} days {} hours and {} minutes'.format(int(total_days[0]),
+                                                   int(total_hours[0]),
+                                                   int(total_minutes[0])))
+
     # display mean travel time in minutes
     mean_minutes = divmod(df['Trip Duration'].mean(), 60)
-    print('The mean trip duration: {} minutes and {} seconds'.format(int(mean_minutes[0]),
-                                                                     int(mean_minutes[1].round())))
+    print('The mean trip duration: '
+          '{} minutes and {} seconds'.format(int(mean_minutes[0]),
+                                             int(mean_minutes[1].round())))
     print("\nThis took {} seconds.".format(time.time() - start_time))
     print('-'*40)
 
